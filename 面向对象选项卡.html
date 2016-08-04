@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #container{
+            width:400px;
+            height:400px;
+            margin: 0 auto;
+            border:1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button>新闻</button>
+        <button>娱乐</button>
+        <button>体育</button>
+        <button>推荐</button>
+    </div>
+<script>
+    window.onload=function(){
+        var obox=document.getElementById('container');
+        var abutton=obox.getElementsByTagName('button');
+        var adiv =obox.getElementsByTagName('div');
+       // alert(obox.children.length);
+      //构造函数
+        var Choose=function(type,content){
+            if(this instanceof Choose)
+            {
+                //调用构造，相当于Choose.type(content)
+                this[type](content);
+            }
+            else
+            {
+                return new Choose(type,content);
+            }
+        };
+        //构造原型
+        Choose.prototype={
+            //新闻函数
+            新闻:function(content)
+            {
+                this.content=content;
+                //立即调用函数
+                (
+                        function(content){
+                            for(var j=0;j<adiv.length;j++)
+                            {
+                                obox.removeChild(adiv[j]);
+                            }
+                            obox.appendChild(creatediv(content));
+                        }
+
+                )(content);
+            },
+            //娱乐函数
+            娱乐:function(content)
+            {
+                this.content=content;
+                //立即调用函数
+                (
+                        function(content){
+
+                            for(var j=0;j<adiv.length;j++)
+                            {
+                                obox.removeChild(adiv[j]);
+                            }
+                            obox.appendChild(creatediv(content));
+                        }
+
+                )(content);
+            },
+            //体育函数
+            体育:function(content)
+            {
+                this.content=content;
+                (
+                    //立即调用函数
+                        function(content){
+                            for(var j=0;j<adiv.length;j++)
+                            {
+                                obox.removeChild(adiv[j]);
+                            }
+                            obox.appendChild(creatediv(content));
+                        }
+
+                )(content);
+            },
+            //推荐函数
+            推荐:function(content)
+            {
+                this.content=content;
+                (
+                    //立即调用函数
+                        function(content){
+                            for(var j=0;j<adiv.length;j++)
+                            {
+                                obox.removeChild(adiv[j]);
+                            }
+                            obox.appendChild(creatediv(content));
+                        }
+
+                )(content);
+            }
+
+        };
+        var data=[{type:'新闻',content:'1'},
+            {type:'娱乐',content:'2'},{type:'体育',content:'3'},{type:'推荐',content:'4'}];
+        for(var i=1;i<4;i++)
+        {
+            abutton[i].index=i;
+            abutton[i].onclick= function () {
+                Choose(data[this.index].type, data[this.index].content);
+            };
+        }
+
+    };
+
+    function creatediv(content){
+        var Odiv=document.createElement('div');
+        Odiv.innerHTML=content;
+        Odiv.style.border='1px solid red';
+        Odiv.style.width='300px';
+        Odiv.style.height='300px';
+        return Odiv;
+    }
+</script>
+</body>
+</html>

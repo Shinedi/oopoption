@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        //父类对象
+        function Person() {
+            this.superValue = "super";
+            this.books=['xml','html'];
+        }
+
+        //父类原型方法
+        Person.prototype.getSuperValue=function(){
+            return this.superValue;
+        };
+
+        //子类
+        function Student(){
+            this.studentValue="student";
+        }
+
+        Student.prototype=new Person();  //用父类的对象增加子类的原型属性
+
+        //子类的原型方法
+        Student.prototype.getStudentValue= function () {
+            return this.studentValue;
+        };
+
+        var stu1=new Student();
+
+        var stu2=new Student();
+
+        alert(stu1.books);
+
+        stu2.books.push('js');
+
+        alert(stu1.books);
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
